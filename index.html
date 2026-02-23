@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAKKOTE 2ⁿᵏⁱ DIRIMI ROSI MINE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2d4a9e 100%);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 4px solid #fbbf24;
+        }
+        
+        .school-name {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+        
+        /* Moving Photos Section - MIDDLE with BIGGER PHOTOS */
+        .photo-slider {
+            background: white;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            height: 400px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section-title {
+            color: #1e3a8a;
+            font-size: 22px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 300px;
+            margin: 10px 0;
+        }
+        
+        /* BIGGER PHOTOS - 220x260 as requested */
+        .photo {
+            width: 220px;
+            height: 260px;
+            border-radius: 15px;
+            border: 4px solid #fbbf24;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        
+        .photo.active {
+            opacity: 1;
+        }
+        
+        .photo-name {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #1e3a8a;
+            font-weight: bold;
+            background: #fbbf24;
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            white-space: nowrap;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+            border: 2px solid white;
+        }
+        
+        .photo-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #1e3a8a;
+        }
+        
+        .dot:hover {
+            background: #999;
+        }
+        
+        .dot.active {
+            background: #fbbf24;
+            transform: scale(1.2);
+            border-color: #1e3a8a;
+        }
+        
+        /* Main Content - BOTTOM */
+        .content {
+            padding: 70px 35px 50px;
+            background: #f8fafc;
+        }
+        
+        h2 {
+            color: #1e3a8a;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .enroll-btn {
+            background: #fbbf24;
+            color: #1e3a8a;
+            border: none;
+            padding: 18px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.4);
+            transition: all 0.3s;
+            margin: 20px auto;
+            display: block;
+            border: 2px solid #1e3a8a;
+        }
+        
+        .enroll-btn:hover {
+            transform: scale(1.05);
+            background: #f59e0b;
+        }
+        
+        /* New Text Section - Different Colors */
+        .info-text-container {
+            text-align: center;
+            margin: 30px 0 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border-left: 5px solid #1e3a8a;
+            border-right: 5px solid #1e3a8a;
+        }
+        
+        .info-line1 {
+            color: #e67e22; /* Orange - different from yellow */
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .info-line2 {
+            color: #27ae60; /* Green - different from yellow */
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-line3 {
+            color: #e74c3c; /* Red - different from yellow */
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: #f1c40f20;
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 50px;
+            border: 2px dashed #e74c3c;
+        }
+        
+        .happy-new-year {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px #1e3a8a;
+            margin: 20px 0 30px;
+            padding: 15px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2d4a9e 100%);
+            border-radius: 50px;
+            border: 3px solid #fbbf24;
+            letter-spacing: 1px;
+        }
+        
+        /* Simple Form Text Section */
+        .form-section {
+            margin-top: 30px;
+            border-radius: 15px;
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-instruction {
+            color: #666;
+            font-size: 18px;
+            margin: 15px 0 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="school-name">LAKKOTE 2ⁿᵏⁱ DIRIMI ROSI MINE</div>
+        </div>
+        
+        <!-- Moving Photos Section -->
+        <div class="photo-slider">
+            <div class="section-title">MASSAGAANO</div>
+            
+            <div class="photo-container">
+                <!-- Director 1 -->
+                <div class="photo active">
+                    <img src="director1.jpg" style="width:100%; height:100%; border-radius:12px; object-fit:cover;" alt="Pr. Shimelis">
+                    <div class="photo-name">Pr. Shimelis, loosu harisaancho</div>
+                </div>
+                
+                <!-- Director 2 -->
+                <div class="photo">
+                    <img src="director2.jpg" style="width:100%; height:100%; border-radius:12px; object-fit:cover;" alt="Dr. Tamirat">
+                    <div class="photo-name">Dr. Tamirat, umi Sooreessa</div>
+                </div>
+                
+                <!-- Director 3 -->
+                <div class="photo">
+                    <img src="director3.jpg" style="width:100%; height:100%; border-radius:12px; object-fit:cover;" alt="Kalaa Mesay">
+                    <div class="photo-name">Kalaa Mesay, 2ⁿᵏⁱ Sooreessa</div>
+                </div>
+            </div>
+            
+            <div class="photo-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <h2>2019 ROSU DIRIRA BORREESSAMI</h2>
+            <p class="subtitle">Borreessamate rosu mine marre agadha gattino!!!</p>
+            
+            <!-- Yellow Button -->
+            <a href="https://forms.gle/rigau1PANhDa8LJ2A" target="_blank" style="text-decoration: none;">
+                <button class="enroll-btn">kowiicho kisse xaanni borreessami</button>
+            </a>
+            
+            <!-- NEW TEXT SECTION - Between button and DANCHA ROSU DIRO -->
+            <div class="info-text-container">
+                <div class="info-line1">🏠 minekki heedhe borreessami</div>
+                <div class="info-line2">📞 hasiritto yannara borreessami</div>
+                <div class="info-line3">⏰ 24nta sa"aate fanote (hashshano barrano)</div>
+            </div>
+            
+            <!-- Happy New Year -->
+            <div class="happy-new-year">
+                DANCHA ROSU DIRO 🎉
+            </div>
+            
+            <!-- Form Information -->
+            <div class="form-section">
+                <h3 style="margin-bottom: 20px; color:#1e3a8a;">Borreessammanni Formewa harate</h3>
+                <p class="form-instruction">bica kuula kisi</p>
+            </div>
+        </div>
+        
+        <footer>
+            © 2024 Leku Secondary and Preparatory School. All rights reserved.
+        </footer>
+    </div>
+    
+    <script>
+        // Moving Photos Script
+        const photos = document.querySelectorAll('.photo');
+        const dots = document.querySelectorAll('.dot');
+        let currentPhoto = 0;
+        
+        function changePhoto() {
+            photos.forEach(photo => photo.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentPhoto = (currentPhoto + 1) % photos.length;
+            
+            photos[currentPhoto].classList.add('active');
+            dots[currentPhoto].classList.add('active');
+        }
+        
+        setInterval(changePhoto, 3000);
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                photos.forEach(photo => photo.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                photos[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentPhoto = index;
+            });
+        });
+    </script>
+</body>
+</html>
